@@ -1,6 +1,6 @@
 {
   "name": "ngx-loadable-component",
-  "version": "0.0.4",
+  "version": "4.0.0",
   "description": "Lazy load & code-split your Angular components.",
   "author": "Dan Harris <me@danharris.io> (https://danharris.io/)",
   "keywords": [
@@ -19,10 +19,10 @@
     "url": "https://github.com/dan-harris/ngx-loadable-component.git"
   },
   "license": "MIT",
-  "peerDependencies": {
-    "@angular/common": "^6.0.0 || ^7.0.0",
-    "@angular/core": "^6.0.0 || ^7.0.0",
-    "@angular/router": "^6.0.0 || ^7.0.0",
-    "rxjs": "^6.0.0"
+  "devDependencies": {
+    "@angular/common": "^6.0.0  || ^14.2.3",
+    "@angular/core": "^6.0.0  || ^14.2.3",
+    "@angular/router": "^6.0.0  || ^14.2.3",
+    "rxjs": "^6.6.0"
   }
 }

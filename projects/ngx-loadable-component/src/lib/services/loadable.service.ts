@@ -1,4 +1,4 @@
-import { ComponentFactory, Inject, Injectable, Injector, NgModuleFactory, NgModuleFactoryLoader, NgModuleRef } from '@angular/core';
+import { ComponentFactory, Inject, Injectable, Injector, NgModuleFactory, NgModuleRef } from '@angular/core';
 import { from as ObservableFrom, Observable, throwError as ObservableThrowError } from 'rxjs';
 import { LOADABLE_COMPONENT, LOADABLE_MANIFESTS, LoadableManifest } from '../models/loadable-manifest.model';
 
@@ -6,7 +6,7 @@ import { LOADABLE_COMPONENT, LOADABLE_MANIFESTS, LoadableManifest } from '../mod
   providedIn: 'root'
 })
 export class LoadableService {
-  constructor(@Inject(LOADABLE_MANIFESTS) private manifests: Array<LoadableManifest>, private loader: NgModuleFactoryLoader, private injector: Injector) {}
+  constructor(@Inject(LOADABLE_MANIFESTS) private manifests: Array<LoadableManifest>, private loader: NgModuleRef<any>, private injector: Injector) {}
 
   /**
    * Retrieve a ComponentFactory, based on the specified componentId (defined in the LoadableManifest array).
@@ -16,7 +16,7 @@ export class LoadableService {
 
     if (!manifest) return ObservableThrowError(`DynamicComponentLoader: Unknown componentId "${componentId}"`);
 
-    const componentPromise: Promise<ComponentFactory<any>> = this.loader.load(manifest.loadChildren).then((ngModuleFactory: NgModuleFactory<any>) => {
+    const componentPromise: Promise<ComponentFactory<any>> = this.loader.instance(manifest.loadChildren).then((ngModuleFactory: NgModuleFactory<any>) => {
       const moduleRef: NgModuleRef<any> = ngModuleFactory.create(injector || this.injector);
       const dynamicComponentType: any = moduleRef.injector.get(LOADABLE_COMPONENT);
 
